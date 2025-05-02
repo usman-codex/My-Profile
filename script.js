@@ -3,35 +3,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- === Configuration === ---
     const STICKY_NAV_OFFSET = 50;
     const SCROLL_TOP_VISIBILITY_OFFSET = 300;
-    const COUNTER_ANIMATION_DURATION = 1500; // ms
-    const FORM_CONFIRMATION_TIMEOUT = 3000; // ms
+    const COUNTER_ANIMATION_DURATION = 1500; 
+    const FORM_CONFIRMATION_TIMEOUT = 3000; 
     // Add Formspree/EmailJS endpoint here
-    const CONTACT_FORM_ENDPOINT = "YOUR_FORM_ENDPOINT_HERE"; // <<< IMPORTANT: REPLACE THIS!
+    const CONTACT_FORM_ENDPOINT = "YOUR_FORM_ENDPOINT_HERE"; 
 
     // --- === Element Selections === ---
-    const navbar = document.querySelector('.navbar'); // Keep if custom navbar, adjust/remove if Bootstrap navbar
-    const hamburger = document.querySelector('.hamburger'); // Remove if using Bootstrap navbar-toggler
-    const navMenuWrapper = document.querySelector('.nav-menu-wrapper'); // Remove if using Bootstrap collapse
-    const navLinks = document.querySelectorAll('.nav-link'); // Keep for closing menu on click if custom mobile nav
-    const themeToggle = document.getElementById('themeToggle'); // Keep
-    const contactForm = document.getElementById('contact-form'); // Keep
-    const formStatus = document.getElementById('form-status'); // Keep
-    const formSuccessOverlay = document.getElementById('form-success-overlay'); // Keep
-    const scrollToTopBtn = document.querySelector('.scroll-to-top'); // Keep
-    const statNumbers = document.querySelectorAll('.stat-number[data-target]'); // Keep
-    const animatedElements = document.querySelectorAll('[data-animation]'); // Keep
-    const filterBtns = document.querySelectorAll('.filter-btn'); // Keep
-    const gridItemsContainer = document.querySelector('.skills-grid, .projects-grid'); // Helper to find items within grid
-    // Custom Modal elements - Remove if using Bootstrap modals
+    const navbar = document.querySelector('.navbar'); 
+    const hamburger = document.querySelector('.hamburger'); 
+    const navMenuWrapper = document.querySelector('.nav-menu-wrapper'); 
+    const navLinks = document.querySelectorAll('.nav-link'); 
+    const themeToggle = document.getElementById('themeToggle'); 
+    const contactForm = document.getElementById('contact-form'); 
+    const formStatus = document.getElementById('form-status'); 
+    const formSuccessOverlay = document.getElementById('form-success-overlay'); 
+    const scrollToTopBtn = document.querySelector('.scroll-to-top'); 
+    const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+    const animatedElements = document.querySelectorAll('[data-animation]'); 
+    const filterBtns = document.querySelectorAll('.filter-btn'); 
+    const gridItemsContainer = document.querySelector('.skills-grid, .projects-grid'); 
+    // Custom Modal elements 
     const modalTriggers = document.querySelectorAll('[data-modal-target]');
     const modalOverlays = document.querySelectorAll('.modal-overlay');
     const modalCloseBtns = document.querySelectorAll('.modal-close-button');
-    // Add selectors for elements needing advanced JS (magnetic, tilt, etc.) - Keep
+
 
     // --- === State Variables === ---
-    let isMobileMenuOpen = false; // Remove if using Bootstrap navbar
+    let isMobileMenuOpen = false; 
 
-    // --- === Core Functions === ---
 
     // Apply theme (light/dark) - Keep
     const applyTheme = (theme) => {
@@ -50,9 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Toggle Mobile Menu - Remove if using Bootstrap navbar
+    // Toggle Mobile Menu 
     const toggleMobileMenu = () => {
-        // Check if hamburger exists before toggling (in case it was removed for Bootstrap)
+        
         if (!hamburger || !navMenuWrapper) return;
         isMobileMenuOpen = !isMobileMenuOpen;
         hamburger.classList.toggle('active', isMobileMenuOpen);
@@ -79,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (scrollToTopBtn) {
             scrollToTopBtn.classList.toggle('visible', window.scrollY > SCROLL_TOP_VISIBILITY_OFFSET);
         }
-        // Add more scroll-based logic here (e.g., active nav link highlighting)
+       
     };
 
     // Animate Counter Function - Keep
@@ -101,18 +100,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (current < target) {
                 requestAnimationFrame(step);
             } else {
-                 element.textContent = (element.textContent.includes('+') ? '+' : '') + target + (element.textContent.includes('%') ? '%' : ''); // Ensure final value is exact
-                 element.dataset.animated = 'true'; // Mark as animated
+                 element.textContent = (element.textContent.includes('+') ? '+' : '') + target + (element.textContent.includes('%') ? '%' : ''); 
+                 element.dataset.animated = 'true';
             }
         };
         requestAnimationFrame(step);
     };
 
 
-    // Handle Form Submission - Keep (Ensure form ID and elements match)
+    // Handle Form Submission
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        if (!contactForm) return; // Exit if form doesn't exist
+        if (!contactForm) return; 
 
         // Basic check for endpoint placeholder
         if (CONTACT_FORM_ENDPOINT === "YOUR_FORM_ENDPOINT_HERE") {
@@ -211,13 +210,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add transition effect classes (optional)
             if (shouldShow) {
                 item.style.display = ''; // Reset display
-                // item.classList.remove('fade-out'); // Example
-                // item.classList.add('fade-in'); // Example
+              
             } else {
-                 // item.classList.add('fade-out'); // Example
-                 // item.classList.remove('fade-in'); // Example
-                 // Hide after transition (if using CSS transitions)
-                 // setTimeout(() => { item.style.display = 'none'; }, 300); // Match CSS transition duration
+                
                 item.style.display = 'none'; // Direct hide if no transition
             }
         });
@@ -299,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     modalOverlays.forEach(overlay => {
         overlay.addEventListener('click', (e) => {
-            if (e.target === overlay) { // Ensure click is on the overlay itself
+            if (e.target === overlay) { 
                  closeModal(overlay);
             }
         });
@@ -327,20 +322,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     animateCounter(target);
                 }
 
-                // Optionally unobserve after first animation to prevent re-triggering
-                // observerInstance.unobserve(target);
+             
 
             } else {
-                // Optional: Reset animation if you want it to trigger every time it scrolls into view
+               
                  if (!target.matches('.stat-number')) { // Don't reset counters easily
                     target.classList.remove('is-visible');
                     target.style.removeProperty('--animation-delay');
                  }
-                 // Optional: Reset counter state if it should re-animate
-                 // if (target.matches('.stat-number[data-target]')) {
-                 //    target.textContent = (target.textContent.includes('+') ? '+' : '') + '0' + (target.textContent.includes('%') ? '%' : '');
-                 //    delete target.dataset.animated;
-                 // }
+              
             }
         });
     };
@@ -356,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- === Initializations === --- Keep
     initializeTheme();
     handleScroll(); // Initial check for sticky nav/scroll-top
-    const yearSpan = document.getElementById('current-year'); // Update footer year
+    const yearSpan = document.getElementById('current-year'); 
     if (yearSpan) {
         yearSpan.textContent = new Date().getFullYear();
     }
@@ -376,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ripple.style.width = ripple.style.height = `${size}px`;
             ripple.style.left = `${x}px`;
             ripple.style.top = `${y}px`;
-            ripple.classList.add('ripple-effect'); // Use a dedicated class for the ripple span itself
+            ripple.classList.add('ripple-effect'); 
 
             // Check if button already has a ripple and remove it
             const existingRipple = button.querySelector('.ripple-effect');
@@ -391,18 +381,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-     // Tilt Effect Placeholder (Requires a library like Vanilla-Tilt.js)
-     // const tiltElements = document.querySelectorAll('.tilt-card');
-     // if (typeof VanillaTilt !== 'undefined') {
-     //     VanillaTilt.init(tiltElements, {
-     //         max: 15,
-     //         speed: 400,
-     //         glare: true,
-     //         "max-glare": 0.3
-     //     });
-     // } else {
-     //     console.log("VanillaTilt library not found for tilt effect.");
-     // }
 
 
 }); // End DOMContentLoaded
