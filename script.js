@@ -407,24 +407,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
 }); // End DOMContentLoaded
 
-// Add a CSS rule for the ripple effect span if you keep the ripple JS:
-/*
-.btn-ripple {
-    position: relative;
-    overflow: hidden;
-}
-.ripple-effect {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.4);
-    transform: scale(0);
-    animation: ripple-animation 0.6s linear;
-    pointer-events: none;
-}
-@keyframes ripple-animation {
-    to {
-        transform: scale(4);
-        opacity: 0;
-    }
-}
-*/
+          // ------ stats running------
+            document.addEventListener("DOMContentLoaded", function () {
+                const counters = document.querySelectorAll('.stat-number');
+                const duration = 2000; // Total duration in ms for the animation
+            
+                const animateCounters = () => {
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        const isPercent = counter.innerText.includes('%');
+                        const isPlus = counter.innerText.includes('+');
+                        let start = 0;
+                        const startTime = performance.now();
+            
+                        const update = (currentTime) => {
+                            const elapsed = currentTime - startTime;
+                            const progress = Math.min(elapsed / duration, 1); // max 1
+                            const value = Math.floor(progress * target);
+            
+                            counter.innerText = value + (isPercent ? '%' : isPlus ? '+' : '');
+            
+                            if (progress < 1) {
+                                requestAnimationFrame(update);
+                            } else {
+                                counter.innerText = target + (isPercent ? '%' : isPlus ? '+' : '');
+                            }
+                        };
+            
+                        requestAnimationFrame(update);
+                    });
+                };
+            
+                // Trigger when section is in view
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animateCounters();
+                            observer.disconnect(); // Run once
+                        }
+                    });
+                }, { threshold: 0.4 });
+            
+                const statsSection = document.querySelector('#stats');
+                if (statsSection) observer.observe(statsSection);
+            });
