@@ -451,7 +451,7 @@ body[data-theme="light"] .stats-bar { background-color: rgba(var(--card-color-rg
 
 @media (max-width: 768px) {
     html { scroll-padding-top: 70px; } 
-    .navbar { padding: 10px 0; min-height: 70px; } 
+    .navbar { padding: 0px 0; min-height: 70px; } 
     
 }
 
