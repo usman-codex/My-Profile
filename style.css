@@ -227,16 +227,12 @@ body[data-theme="light"] .stats-bar { background-color: rgba(var(--card-color-rg
 .stat-number { display: block; font-size: 2.5rem; font-weight: 700; color: var(--heading-color); line-height: 1.1; margin-bottom: 5px; background: var(--gradient-main); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .stat-label { font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
 
-/* === Skills Section === */
-/* .filter-buttons { display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; flex-wrap: wrap; } */ /* Adjust spacing/alignment with Bootstrap utilities if needed */
-/* Remove default filter-btn styles if using Bootstrap .btn classes */
-/* .filter-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-secondary); padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: all var(--transition-fast); } */
-/* Adjust hover/active state for Bootstrap buttons if needed */
-/* .filter-btn:hover { border-color: var(--neon-purple); color: var(--neon-purple); background: rgba(var(--neon-purple-rgb), 0.1); } */
-/* .filter-btn.active { border-color: var(--neon-purple); color: #fff; background: var(--neon-purple); box-shadow: 0 0 15px rgba(var(--neon-purple-rgb), 0.4); } */
-
-/* .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 25px; } */ /* Replaced by Bootstrap row/col */
-/* Keep skill-card styling if not replacing with Bootstrap .card */
+.swiper-wrapper{
+    display: flex;
+    flex-direction: column;
+        gap: 20px;
+    
+}
 .skill-card {
     background-color: var(--card-color); padding: 25px; border-radius: 12px; text-align: center;
     border: 1px solid var(--border-color); position: relative; overflow: hidden;
