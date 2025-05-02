@@ -545,6 +545,9 @@ body[data-theme="light"] .stats-bar { background-color: rgba(var(--card-color-rg
     filter: brightness(1.15);
     transform: scale(1.05);
 }
+.skills-grid2{
+    padding-top: 50px;
+}
 
 /* Add any necessary overrides for Bootstrap here */
 /* Example: Make Bootstrap buttons use your gradient */
